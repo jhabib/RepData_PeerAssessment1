@@ -1,9 +1,10 @@
 require(dplyr)
 require(ggplot2)
 require(data.table)
+require(timeDate)
 
 ##Loading and preprocessing the data
-pa <- read.csv("activity.csv", header = TRUE)
+pa <- read.csv("~/activity.csv", header = TRUE)
 
 ##What is mean total number of steps taken per day?
 ##Remove NA values
@@ -79,3 +80,28 @@ print(mean_steps_per_day_full)
 
 median_steps_per_day_full <- median(steps_per_day_full$steps)
 print(median_steps_per_day_full)
+
+##Are there differences in activity patterns between weekdays and weekends
+
+##Create a new factor variable in the dataset with two levels "weekday" and "weekend"
+DayType <- function(date){
+  if(isWeekday(date)==TRUE)
+    s <- "weekday"
+  else 
+    s <- "weekend"
+  return(s)
+}
+pa_full$daytype <- sapply(pa_full$date, function(x) DayType(x))
+
+##Calculate average of steps across all "weekdays" or "weekends"
+mean_steps_by_daytype <- aggregate(steps~daytype+interval, data = pa_full, FUN=mean)
+
+##Create a timeseries plot of interval (x-axis) vs mean steps by day type
+gmeanbyday <- ggplot(data=mean_steps_by_daytype, aes(x=interval, y=steps)) + 
+  geom_line(color="lightblue") + 
+  facet_wrap(~daytype, ncol=1) + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+plot(gmeanbyday)
