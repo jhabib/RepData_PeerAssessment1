@@ -7,7 +7,7 @@ output:
 ---
 
 ## Load the package dependencies
-```{r}
+```{r load_packages}
 require(dplyr)
 require(ggplot2)
 require(data.table)
@@ -15,14 +15,14 @@ require(timeDate)
 ```
 
 ## Loading and preprocessing the data
-```{r}
+```{r load_data, echo=TRUE}
 ##make sure the "activity.csv" file is located in your working directory
 pa <- read.csv("~/activity.csv", header = TRUE)
 ```
 
 
 ## What is mean total number of steps taken per day?
-```{r}
+```{r steps_per_day, echo=TRUE}
 ##Remove NA values
 pa_complete <- pa[complete.cases(pa),]
 rownames(pa_complete) <- NULL
@@ -46,7 +46,7 @@ print(median_steps_per_day)
 ```
 
 ## What is the average daily activity pattern?
-```{r}
+```{r mean_daily_activity, echo=TRUE}
 ##Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) 
 ##and the average number of steps taken 
 ##averaged across all days (y-axis)
@@ -65,7 +65,7 @@ print(max_average_steps_interval)
 ```
 
 ## Imputing missing values
-```{r}
+```{r impute_missing_values, echo=TRUE}
 ##Calculate and report the total number of missing values in the dataset 
 pa_incomplete <- pa[!complete.cases(pa),]
 missing_values <- nrow(pa_incomplete)
@@ -106,7 +106,7 @@ print(median_steps_per_day_full)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r}
+```{r activity_patters_by_day_type, echo=TRUE}
 ##Create a new factor variable in the dataset with two levels "weekday" and "weekend"
 DayType <- function(date){
   if(isWeekday(date)==TRUE)

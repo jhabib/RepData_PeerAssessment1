@@ -41,7 +41,7 @@ ghist <- ggplot(data=steps_per_day, aes(steps)) +
 plot(ghist)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![plot of chunk steps_per_day](figure/steps_per_day-1.png) 
 
 ```r
 ##Calculate the mean and median of steps taken per day
@@ -78,7 +78,7 @@ gplot <- ggplot(data=mean_steps_per_interval, aes(x=interval, y=steps)) +
 plot(gplot)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![plot of chunk mean_daily_activity](figure/mean_daily_activity-1.png) 
 
 ```r
 ##Get the interval with the highest average number of steps across all days
@@ -130,7 +130,7 @@ ghist_full <- ggplot(data=steps_per_day_full, aes(steps)) +
 plot(ghist_full)
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+![plot of chunk impute_missing_values](figure/impute_missing_values-1.png) 
 
 ```r
 ##Calculate the mean and median of steps taken per day with the imputed data
@@ -179,4 +179,4 @@ gmeanbyday <- ggplot(data=mean_steps_by_daytype, aes(x=interval, y=steps)) +
 plot(gmeanbyday)
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![plot of chunk activity_patters_by_day_type](figure/activity_patters_by_day_type-1.png) 
